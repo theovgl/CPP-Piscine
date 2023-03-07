@@ -14,3 +14,4 @@ Exercices to learn OOP and C++.
 | CPP-Module-06 | 100%  | Static cast, dynamic cast, reinterpret cast, cast operator |
 | CPP-Module-07 | 100%  | Templates                                                  |
 | CPP-Module-08 | 100%  | Containers, STL                                            |
+| CPP-Module-09 | ---%  | Containers                                                 |
