@@ -22,7 +22,7 @@ int RPN::evaluate(char *input)
 			_stack.push(input[i] - '0');
 		} else if (_isOperator(input[i])) {
 			if (_stack.size() < 2)
-				throw std::exception();
+				throw StackToSmall();
 			int result;
 			int second_operand = _stack.top();
 			_stack.pop();
