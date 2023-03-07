@@ -13,7 +13,6 @@ RPN::RPN(char *input)
 
 RPN::~RPN()
 {
-
 }
 
 int RPN::evaluate(char *input)
@@ -21,7 +20,9 @@ int RPN::evaluate(char *input)
 	for (size_t i = 0; input[i] != '\0'; i++) {
 		if (isdigit(input[i])) {
 			_stack.push(input[i] - '0');
-		} else if (_isOperator(input[i]) && _stack.size() >= 2) {
+		} else if (_isOperator(input[i])) {
+			if (_stack.size() < 2)
+				throw std::exception();
 			int result;
 			int second_operand = _stack.top();
 			_stack.pop();
