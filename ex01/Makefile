@@ -3,7 +3,7 @@ SRCS	= main.cpp RPN.cpp
 OBJSDIR	= objs
 OBJS	= $(addprefix $(OBJSDIR)/, $(SRCS:.cpp=.o))
 CC		= c++
-CFLAGS	= -Wall -Wextra -std=c++98
+CFLAGS	= -Wall -Wextra -Werror -std=c++98
 LIBS	=
 INCL	= -I includes/
 RM		= rm -f
