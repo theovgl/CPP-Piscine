@@ -31,8 +31,6 @@ void BitcoinExchange::_print_input_db()
 
 float BitcoinExchange::_compute_amount(float amount, const std::string& date_to_search)
 {
-	if (date_to_search < "2009-01-03")
-		return 0.00;
 	std::map<std::string, float>::const_iterator it = _prices_history.find(date_to_search);
 	if (it != _prices_history.end())
 		return it->second * amount;
@@ -49,11 +47,13 @@ void BitcoinExchange::print_result()
 
 	while (it != _amount.end()) {
 		if (_check_date_format(it->first) == false) {
-			std::cout << "Error: bad input => " << it->first << std::endl;
+			std::cout << "\033[1;31m" << "Error: bad input => " << it->first << "\033[0m" << std::endl;
+		} else if (it->first < "2009-01-03") {
+			std::cout << "\033[1;31m" << "Bitcoin didn't exist yet on that date => " << it->first << "\033[0m" << std::endl;
 		} else if (it->second < 0) {
-			std::cout << "Error: not a positive number." << std::endl;
+			std::cout << "\033[1;31m" << "Error: not a positive number." << "\033[0m" << std::endl;
 		} else if (it->second > 1000.00) {
-			std::cout << "Error: too large a number." << std::endl;
+			std::cout << "\033[1;31m" << "Error: too large number => " << it->second << "\033[0m" << std::endl;
 		} else {
 			std::cout << it->first << " => " << it->second << " = " << _compute_amount(it->second, it->first) << std::endl;
 		}
@@ -119,7 +119,10 @@ int BitcoinExchange::openInput(const char *file_path)
 
 		if (value.empty() || date == "date")
 			continue ;
-		else {
+		else if (value.find_first_not_of("01234565789. ") != std::string::npos) {
+			std::cout << "\033[1;31m" << "Error: not a number =>" << value << "\033[0m" << std::endl;
+			continue ;
+		} else {
 			_amount.insert(std::pair<std::string, float>(date, atof(value.c_str())));
 		}
 	}
