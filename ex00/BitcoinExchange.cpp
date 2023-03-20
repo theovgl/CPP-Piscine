@@ -117,10 +117,10 @@ int BitcoinExchange::openInput(const char *file_path)
 		std::getline(ss, date, '|');
 		std::getline(ss, value);
 
-		if (value.empty() || date == "date")
+		if (value.empty() || std::strstr(date.c_str(), "date") != NULL)
 			continue ;
 		else if (value.find_first_not_of("01234565789. ") != std::string::npos) {
-			std::cout << "\033[1;31m" << "Error: not a number =>" << value << "\033[0m" << std::endl;
+			std::cout << "\033[1;31m" << "Error: not a valid input => " << value << "\033[0m" << std::endl;
 			continue ;
 		} else {
 			_amount.insert(std::pair<std::string, float>(date, atof(value.c_str())));
