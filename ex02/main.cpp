@@ -13,6 +13,8 @@ int main(int argc, const char* argv[])
 
 	try {
 		vector.fill_container( argv );
+		vector.print(false);
+		vector.compute();
 	} catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
 		return 1;
@@ -20,19 +22,12 @@ int main(int argc, const char* argv[])
 
 	try {
 		list.fill_container( argv );
+		list.compute();
 	} catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
 		return 1;
 	}
-	vector.print(false);
-
-	try {
-		vector.compute();
-		list.compute();
-	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
-	}
-	list.print(true);
+	vector.print(true);
 	vector.print_time();
 	list.print_time();
 
