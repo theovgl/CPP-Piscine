@@ -65,7 +65,7 @@ int RPN::_multiple(int first_operand, int second_operand)
 
 int RPN::_divide(int first_operand, int second_operand)
 {
-	return (first_operand * second_operand);
+	return (first_operand / second_operand);
 }
 
 bool RPN::_isOperator(char c) const
