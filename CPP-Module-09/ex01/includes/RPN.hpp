@@ -32,6 +32,13 @@ class RPN
 			}
 	};
 
+	class StackToSmall : public std::exception {
+		public:
+			virtual const char* what() const throw() {
+				return "Error: not enough number to perfom operation";
+			}
+	};
+
  private:
 	std::stack<int> _stack;
 

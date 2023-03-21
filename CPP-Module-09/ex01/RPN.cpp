@@ -22,7 +22,7 @@ int RPN::evaluate(char *input)
 			_stack.push(input[i] - '0');
 		} else if (_isOperator(input[i])) {
 			if (_stack.size() < 2)
-				throw std::exception();
+				throw StackToSmall();
 			int result;
 			int second_operand = _stack.top();
 			_stack.pop();
@@ -65,7 +65,7 @@ int RPN::_multiple(int first_operand, int second_operand)
 
 int RPN::_divide(int first_operand, int second_operand)
 {
-	return (first_operand * second_operand);
+	return (first_operand / second_operand);
 }
 
 bool RPN::_isOperator(char c) const
